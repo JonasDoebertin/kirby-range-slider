@@ -14,7 +14,8 @@
  *
  * @since 1.0.0
  */
-class RangeSliderField extends InputField {
+class RangeSliderField extends InputField
+{
 
     /**
      * Language files directory.
@@ -37,9 +38,12 @@ class RangeSliderField extends InputField {
         ),
         'js' => array(
             'nouislider-8.0.2.min.js',
+            'wnumb-1.0.2.min.js',
             'rangeslider.js',
         ),
     );
+
+    protected $step = 1;
 
     /**
      * Translated strings.
@@ -70,6 +74,35 @@ class RangeSliderField extends InputField {
     }
 
     /**
+     * Magic setter.
+     *
+     * Set a fields property and apply default value if required.
+     *
+     * @since 1.0.0
+     *
+     * @param string $option
+     * @param mixed $value
+     */
+    public function __set($option, $value)
+    {
+        /* Set given value */
+        $this->$option = $value;
+
+        /* Check if value is valid */
+        switch($option)
+        {
+            case 'step':
+                $this->maybeSetStep($value);
+                break;
+        }
+    }
+
+    protected function maybeSetStep($value)
+    {
+        $this->step = is_numeric($value) ? floatval($value) : 1;
+    }
+
+    /**
      * Create input element
      *
      * @since 1.0.0
@@ -84,7 +117,7 @@ class RangeSliderField extends InputField {
             'type'         => 'text',
             'name'         => $this->name(),
             'id'           => $this->id(),
-            'value'        => '',
+            'value'        => $this->value(),
             'required'     => $this->required(),
             'autocomplete' => 'off',
             'disabled'     => $this->disabled(),
@@ -96,6 +129,12 @@ class RangeSliderField extends InputField {
         /* Prepare for JS overlay */
         $input->attr('tabindex', '-1');
         $input->addClass('input-is-readonly');
+
+        /* Set data attributes */
+        $input->data(array(
+            'field' => 'rangesliderfield',
+            'step' => $this->step,
+        ));
 
         return $input;
     }
@@ -112,6 +151,19 @@ class RangeSliderField extends InputField {
         $element->addClass('field-with-rangeslider');
 
         return $element;
+    }
+
+    /**
+     * Create inner field element
+     *
+     * @since 1.0.0
+     * @return Brick
+     */
+    public function content()
+    {
+        $content = Tpl::load(__DIR__ . DS . 'partials' . DS . 'content.php', array('field' => $this));
+
+        return $content;
     }
 
 }

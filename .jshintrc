@@ -19,5 +19,7 @@
     "browser"   : true,
     "jquery"    : true,
 
-    "globals"   : {}
+    "globals"   : {
+        "console"
+    }
 }
