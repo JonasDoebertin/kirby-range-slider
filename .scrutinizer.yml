@@ -1,0 +1,3 @@
+filter:
+    excluded_paths:
+        - assets/js/nouislider-*     # All noUiSlider dependencies
