@@ -116,6 +116,9 @@ class RangeSliderField extends InputField
             case 'default':
                 return $this->sanitizeNumber($this->{$key}, 1, true);
 
+            case 'disabled':
+                return $this->sanitizeBool($this->{$key}, false);
+
             default:
                 return $this->{$key};
         }
@@ -145,17 +148,15 @@ class RangeSliderField extends InputField
      */
     protected function sanitizeBool($bool, $default = false)
     {
-        if (is_bool($bool)) {
-            return $bool;
-        }
-
         switch ($bool) {
 
+            case true:
             case 'true':
             case 'yes':
             case 'on':
                 return true;
 
+            case false:
             case 'false':
             case 'no':
             case 'off':
@@ -184,14 +185,11 @@ class RangeSliderField extends InputField
             'value'        => $this->value(),
             'required'     => $this->required(),
             'autocomplete' => 'off',
-            'disabled'     => $this->disabled(),
+            'tabindex'     => '-1',
+            'disabled'     => $this->option('disabled'),
             'readonly'     => $this->readonly(),
         ));
 
-        /* Set previous content */
-
-        /* Prepare for JS overlay */
-        $input->attr('tabindex', '-1');
         $input->addClass('input-is-readonly');
 
         /* Set data attributes */
