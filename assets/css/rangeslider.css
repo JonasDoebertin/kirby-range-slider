@@ -12,7 +12,7 @@
 }
 
 /**
- * Slider & Display Layout
+ * SLIDER & DISPLAY LAYOUT
  */
 .rangeslider-wrapper {
     display: flex;
@@ -31,37 +31,52 @@
         padding-left: 7px;
     }
 
-        .rangeslider-display {
-            padding: 4px 4px;
-            background: rgb(141, 174, 40);
-            color: white;
-            font-size: 90%;
-            text-align: center;
-            border-radius: 3px;
-            position: relative;
-            cursor: default;
-        }
 
-            .rangeslider-display:after {
-                content: '';
-                position: absolute;
-                top: calc(50% - 6px);
-                left: -2px;
-                width: 0;
-                height: 0;
-                margin-left: -10px;
-                border: 6px solid transparent;
-                border-right-color: rgb(141, 174, 40);
-            }
+/**
+ * DISPLAY
+ */
+
+.rangeslider-display {
+    padding: 4px 4px;
+    color: white;
+    font-size: 90%;
+    text-align: center;
+    border-radius: 3px;
+    position: relative;
+    cursor: default;
+    background-color: #777777;
+    transition: background-color 200ms ease-out;
+}
+
+    .rangeslider-display:after {
+        content: '';
+        position: absolute;
+        top: calc(50% - 6px);
+        left: -2px;
+        width: 0;
+        height: 0;
+        margin-left: -10px;
+        border: 6px solid transparent;
+        border-right-color: #777777;
+        transition: border-right-color 200ms ease-out;
+    }
+
+.rangeslider-active .rangeslider-display {
+    background-color: rgb(141, 174, 40);
+}
+
+    .rangeslider-active .rangeslider-display:after {
+        border-right-color: rgb(141, 174, 40);
+    }
 
 
 
 /**
- * Custom noUiSlider Theme
+ * SLIDER
  */
 
 /* Bar */
-.field-with-rangeslider .noUi-target {
+.rangeslider-wrapper .noUi-target {
     box-shadow: none;
     border: none;
     border-radius: 2px;
@@ -69,31 +84,31 @@
     margin-top: 8px;
 }
 
-.field-with-rangeslider .noUi-background {
+.rangeslider-wrapper .noUi-background {
     background: #ddd;
     box-shadow: none;
 }
 
-.field-with-rangeslider .noUi-connect {
+.rangeslider-wrapper .noUi-connect {
     background: rgba(141, 174, 40, 0.4);
     box-shadow: none;
 }
 
 /* Handle */
-.field-with-rangeslider .noUi-handle {
+.rangeslider-wrapper .noUi-handle {
     background: rgb(141, 174, 40);
     border-radius: 50%;
     border: none;
     box-shadow: 0 3px 6px -2px rgba(0, 0, 0, 0.2);
-    cursor: ew-resize;
+    cursor: pointer;
 }
 
-.field-with-rangeslider .noUi-handle:before,
-.field-with-rangeslider .noUi-handle:after {
+.rangeslider-wrapper .noUi-handle:before,
+.rangeslider-wrapper .noUi-handle:after {
     display: none;
 }
 
-.field-with-rangeslider .noUi-handle {
+.rangeslider-wrapper .noUi-handle {
     top: -4px;
     left: -9px;
     width: 18px;
@@ -101,11 +116,11 @@
 }
 
 /* Disabled state */
-.field-with-rangeslider [disabled].noUi-connect {
+.rangeslider-wrapper [disabled].noUi-connect {
     background: #ddd;
 }
 
-.field-with-rangeslider [disabled] .noUi-handle {
+.rangeslider-wrapper [disabled] .noUi-handle {
 	cursor: not-allowed;
     background: #777;
 }

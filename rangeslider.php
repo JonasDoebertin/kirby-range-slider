@@ -43,7 +43,13 @@ class RangeSliderField extends InputField
         ),
     );
 
-    protected $step = 1;
+    public $min = 0;
+
+    public $max = 100;
+
+    public $step = 1;
+
+    public $default = 0;
 
     /**
      * Translated strings.
@@ -73,33 +79,68 @@ class RangeSliderField extends InputField
         }
     }
 
-    /**
-     * Magic setter.
-     *
-     * Set a fields property and apply default value if required.
-     *
-     * @since 1.0.0
-     *
-     * @param string $option
-     * @param mixed $value
-     */
-    public function __set($option, $value)
+    public function option($key)
     {
-        /* Set given value */
-        $this->$option = $value;
+        switch ($key) {
 
-        /* Check if value is valid */
-        switch($option)
-        {
+            case 'min':
+                return $this->sanitizeNumber($this->{$key}, 1, false);
+
+            case 'max':
+                return $this->sanitizeNumber($this->{$key}, 100, false);
+
             case 'step':
-                $this->maybeSetStep($value);
-                break;
+            case 'default':
+                return $this->sanitizeNumber($this->{$key}, 1, true);
+
+            default:
+                return $this->{$key};
         }
     }
 
-    protected function maybeSetStep($value)
+    /**
+     * Sanitize a number and maybe apply a default value.
+     *
+     * @since 1.0.0
+     * @param mixed    $number
+     * @param integer   $default
+     * @param bool    $float
+     * @return int|float
+     */
+    protected function sanitizeNumber($number, $default = 0, $float = false)
     {
-        $this->step = is_numeric($value) ? floatval($value) : 1;
+        return is_numeric($number) ? (($float === true) ? floatval($number) : intval($number)) : $default;
+    }
+
+    /**
+     * Sanitize a boolean value and maybe apply a default value.
+     * 
+     * @since 1.0.0
+     * @param mixed    $bool
+     * @param bool    $default
+     * @return bool
+     */
+    protected function sanitizeBool($bool, $default = false)
+    {
+        if (is_bool($bool)) {
+            return $bool;
+        }
+
+        switch ($bool) {
+
+            case 'true':
+            case 'yes':
+            case 'on':
+                return true;
+
+            case 'false':
+            case 'no':
+            case 'off':
+                return false;
+
+            default:
+                return $default;
+        }
     }
 
     /**
@@ -133,7 +174,9 @@ class RangeSliderField extends InputField
         /* Set data attributes */
         $input->data(array(
             'field' => 'rangesliderfield',
-            'step' => $this->step,
+            'min'   => $this->option('min'),
+            'max'   => $this->option('max'),
+            'step'  => $this->option('step'),
         ));
 
         return $input;
@@ -164,6 +207,11 @@ class RangeSliderField extends InputField
         $content = Tpl::load(__DIR__ . DS . 'partials' . DS . 'content.php', array('field' => $this));
 
         return $content;
+    }
+
+    public function value()
+    {
+        return (isset($this->value) and is_numeric($this->value)) ? $this->value : $this->$this->option('default');
     }
 
 }

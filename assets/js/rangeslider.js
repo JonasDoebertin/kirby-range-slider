@@ -18,13 +18,16 @@ var RangeSliderField = function($, $field) {
 
     var self = this;
 
-    this.$field = $field;
-    this.$slider = $field.siblings().find('.js-rangeslider-slider');
+    this.$field   = $field;
+    this.$wrapper = $field.parent();
+    this.$slider  = $field.siblings().find('.js-rangeslider-slider');
     this.$display = $field.siblings().find('.js-rangeslider-display');
 
     // this.$tooltips = [];
 
     this.slider = self.$slider.get(0);
+
+    this.isActive = false;
 
     this.init = function() {
         var step,
@@ -41,10 +44,10 @@ var RangeSliderField = function($, $field) {
 
         /* Initialize noUiSlider */
         noUiSlider.create(self.slider, {
-            start: 100,
+            start: self.$field.val(),
             range: {
-                min: 0,
-                max: 100
+                min: self.$field.data('min'),
+                max: self.$field.data('max')
             },
             step: self.$field.data('step'),
             connect: 'lower',
@@ -59,6 +62,28 @@ var RangeSliderField = function($, $field) {
             self.$field.val(values[handle]);
             self.$display.text(values[handle]);
         });
+
+        /* Bind "active" style handlers */
+        self.slider.noUiSlider.on('slide', function(values, handle) {
+            if (self.isActive === false) {
+                self.isActive = true;
+                self.attachActiveState();
+            }
+        });
+        self.slider.noUiSlider.on('change', function(values, handle) {
+            if (self.isActive === true) {
+                self.isActive = false;
+                self.detachActiveState();
+            }
+        });
+    };
+
+    this.attachActiveState = function() {
+        self.$wrapper.addClass('rangeslider-active');
+    };
+
+    this.detachActiveState = function() {
+        self.$wrapper.removeClass('rangeslider-active');
     };
 
     return this.init();
