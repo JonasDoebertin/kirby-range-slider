@@ -23,8 +23,6 @@ var RangeSliderField = function($, $field) {
     this.$slider  = $field.siblings().find('.js-rangeslider-slider');
     this.$display = $field.siblings().find('.js-rangeslider-display');
 
-    // this.$tooltips = [];
-
     this.slider = self.$slider.get(0);
 
     this.isActive = false;
@@ -78,10 +76,20 @@ var RangeSliderField = function($, $field) {
         });
     };
 
+    /**
+     * Attach active state indicator class.
+     *
+     * @since 1.0.0
+     */
     this.attachActiveState = function() {
         self.$wrapper.addClass('rangeslider-active');
     };
 
+    /**
+     * Detach active state indicator class.
+     *
+     * @since 1.0.0
+     */
     this.detachActiveState = function() {
         self.$wrapper.removeClass('rangeslider-active');
     };
@@ -97,19 +105,6 @@ var RangeSliderField = function($, $field) {
  */
 (function($) {
     'use strict';
-
-    /**
-     * Set up special "destroyed" event.
-     *
-     * @since 1.0.0
-     */
-    // $.event.special.destroyed = {
-    //     remove: function(event) {
-    //         if(event.handler) {
-    //             event.handler.apply(this, arguments);
-    //         }
-    //     }
-    // };
 
     /**
      * Tell the Panel to run our initialization.

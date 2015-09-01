@@ -43,12 +43,28 @@ class RangeSliderField extends InputField
         ),
     );
 
+    /**
+     * Minimum value.
+     * @var integer|float
+     */
     public $min = 0;
 
+    /**
+     * Maximum value.
+     * @var integer|float
+     */
     public $max = 100;
 
+    /**
+     * Step value.
+     * @var integer|float
+     */
     public $step = 1;
 
+    /**
+     * Default value.
+     * @var integer|float
+     */
     public $default = 0;
 
     /**
@@ -79,6 +95,13 @@ class RangeSliderField extends InputField
         }
     }
 
+    /**
+     * Get a sanitized option value.
+     *
+     * @since 1.0.0
+     * @param string    $key
+     * @return mixed
+     */
     public function option($key)
     {
         switch ($key) {
@@ -105,7 +128,7 @@ class RangeSliderField extends InputField
      * @param mixed    $number
      * @param integer   $default
      * @param bool    $float
-     * @return int|float
+     * @return integer|float
      */
     protected function sanitizeNumber($number, $default = 0, $float = false)
     {
@@ -114,7 +137,7 @@ class RangeSliderField extends InputField
 
     /**
      * Sanitize a boolean value and maybe apply a default value.
-     * 
+     *
      * @since 1.0.0
      * @param mixed    $bool
      * @param bool    $default
@@ -209,6 +232,11 @@ class RangeSliderField extends InputField
         return $content;
     }
 
+    /**
+     * Get the fields value.
+     * @since 1.0.0
+     * @return integer|float
+     */
     public function value()
     {
         return (isset($this->value) and is_numeric($this->value)) ? $this->value : $this->$this->option('default');
