@@ -27,8 +27,8 @@
     }
 
     .rangeslider-display-wrapper {
-        flex: 0 0 80px;
-        width: 80px;
+        flex: auto;
+        width: auto;
         padding-left: 7px;
     }
 
@@ -38,7 +38,7 @@
  */
 
 .rangeslider-display {
-    padding: 4px 4px;
+    padding: 4px 10px;
     color: white;
     font-size: 90%;
     text-align: center;
@@ -46,6 +46,7 @@
     position: relative;
     cursor: default;
     background-color: #777777;
+    white-space: nowrap;
     transition: background-color 200ms ease-out;
 }
 

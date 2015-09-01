@@ -6,7 +6,7 @@
         <div class="rangeslider-slider js-rangeslider-slider"></div>
     </div>
 
-    <div class="rangeslider-display-wrapper">
+    <div class="rangeslider-display-wrapper  js-rangeslider-display-wrapper">
         <div class="rangeslider-display js-rangeslider-display"><?= $field->value() ?></div>
     </div>
 

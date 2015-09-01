@@ -26,6 +26,13 @@ var RangeSliderField = function($, $field) {
     this.slider = self.$slider.get(0);
 
     this.isActive = false;
+    this.config = {
+        min:     self.$field.data('min'),
+        max:     self.$field.data('max'),
+        step:    self.$field.data('step'),
+        prefix:  self.$field.data('prefix') || '',
+        postfix: self.$field.data('postfix') || ''
+    };
 
     this.init = function() {
         var step,
@@ -40,18 +47,23 @@ var RangeSliderField = function($, $field) {
             decimals = step.toString().split('.')[1].length;
         }
 
+        /* Initialize display width */
+        self.initDisplayWidth();
+
         /* Initialize noUiSlider */
         noUiSlider.create(self.slider, {
             start: self.$field.val(),
             range: {
-                min: self.$field.data('min'),
-                max: self.$field.data('max')
+                min: self.config.min,
+                max: self.config.max
             },
-            step: self.$field.data('step'),
+            step: self.config.step,
             connect: 'lower',
             format: wNumb({
                 decimals: decimals,
-                mark: '.'
+                mark: '.',
+                prefix: self.config.prefix,
+                postfix: self.config.postfix
             })
         });
 
@@ -73,6 +85,21 @@ var RangeSliderField = function($, $field) {
                 self.isActive = false;
                 self.detachActiveState();
             }
+        });
+    };
+
+    this.initDisplayWidth = function() {
+
+        var testNumber = Math.floor(parseInt(self.config.max)) + parseInt(self.config.step),
+            testText   = '' + self.config.prefix + testNumber + self.config.postfix,
+            width;
+
+        self.$display.text(testText);
+        width = self.$display.outerWidth();
+
+        self.$display.parent().css({
+            minWidth: width + 'px',
+            flex: '0 0 ' + width + 'px'
         });
     };
 

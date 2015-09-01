@@ -68,6 +68,18 @@ class RangeSliderField extends InputField
     public $default = 0;
 
     /**
+     * Value display prefix.
+     * @var string
+     */
+    public $prefix = '';
+
+    /**
+     * Value display postfix.
+     * @var string
+     */
+    public $postfix = '';
+
+    /**
      * Translated strings.
      *
      * @since 1.0.0
@@ -194,10 +206,12 @@ class RangeSliderField extends InputField
 
         /* Set data attributes */
         $input->data(array(
-            'field' => 'rangesliderfield',
-            'min'   => $this->option('min'),
-            'max'   => $this->option('max'),
-            'step'  => $this->option('step'),
+            'field'   => 'rangesliderfield',
+            'min'     => $this->option('min'),
+            'max'     => $this->option('max'),
+            'step'    => $this->option('step'),
+            'prefix'  => $this->option('prefix'),
+            'postfix' => $this->option('postfix'),
         ));
 
         return $input;
