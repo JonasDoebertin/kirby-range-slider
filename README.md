@@ -1,4 +1,4 @@
-[![Range Slider for Kirby](https://raw.githubusercontent.com/JonasDoebertin/kirby-range-slider/master/logo.gif)](https://github.com/JonasDoebertin/kirby-range-slider/)
+[![Range Slider for Kirby](https://raw.githubusercontent.com/JonasDoebertin/kirby-range-slider/master/logo.png)](https://github.com/JonasDoebertin/kirby-range-slider/)
 
 **Based on [noUiSlider](https://github.com/leongersen/noUiSlider/).**
 
