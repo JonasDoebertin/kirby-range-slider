@@ -31,7 +31,6 @@ site/
 	fields/
 		rangeslider/
 			assets/
-            languages/
             partials/
 			rangeslider.php
 ```
@@ -45,12 +44,14 @@ $ cd your/project/root
 $ git submodule add https://github.com/JonasDoebertin/kirby-range-slider.git site/fields/rangeslider
 ```
 
-Updating all your Git submodules (eg. the Kirby core modules and any extensions added as submodules) to their latest version, all you need to do is to run these two Git commands.
+Updating all your Git submodules (eg. the Kirby core modules and any extensions added as submodules) to their latest version, all you need to do is to run these few Git commands:
 
 ```bash
 $ cd your/project/root
-$ git submodule foreach --recursive git checkout master
-$ git submodule foreach --recursive git pull
+$ git submodule foreach git checkout master
+$ git submodule foreach git pull
+$ git commit -a -m "Update submodules"
+$ git submodule update --init --recursive
 ```
 
 ## Usage
@@ -62,19 +63,23 @@ Using the field in your blueprint couldn't be easier. After installing the plugi
 ```yaml
 fields:
     title:
-        label: Event Name
-        type:  text
+        label:   Event Name
+        type:    text
     duration:
-        label: Event Duration
-        type: rangeslider
-        min: 1
-        max: 7
-        step: 1
+        label:   Event Duration
+        type:    rangeslider
+        min:     1
+        max:     7
+        step:    1
         postfix: " days"
 
 ```
 
 *Fields related part of the blueprint for the setup shown in the screenshot.*
+
+### Within your templates
+
+You may use any `rangeslider` field you added to your blueprints just like any other standard `number` field.
 
 ## Options
 
@@ -106,7 +111,7 @@ fields:
 
 ### step
 
-Set the minimal difference between two slider values. Examples: If set to `1` the user may select integral numbers (1, 2, 3, …). If set to `0.5` the user will be able to select integral numbers or numbers end with `.5`. If a user should be able to pick a price of a product, you'd want to set this to `0.01` so the user can select numbers with to decimals.
+Set the minimal difference between two slider values. Examples: If set to `1` the user may select integral numbers (1, 2, 3, …). If set to `0.5` the user will be able to select integral numbers or numbers end with `.5`. If a user should be able to pick a price of a product, you'd want to set this to `0.01` so the user can select numbers with to decimals. The `step` options defaults to `1`.
 
 ```yaml
 fields:
@@ -120,4 +125,30 @@ fields:
 
 ### prefix
 
+Setting a `prefix` allows you to make the range slider display even more user-friendly. The prefix will be prepended to the sliders number display (even though it will not be added to the stored value). This is especially useful for adding money symbols when using the range slider to pick prices (see below). The `prefix` and `postfix` options may also be used together.
+
+```yaml
+fields:
+    text:
+        label: Product Price
+        type:  rangeslider
+		min:   1
+        max:   99
+		step:  0.01
+		prefix: "$ "
+```
+
 ### postfix
+
+As with the `prefix` option, setting a `postfix` allows you to make the range slider display more user-friendly. The postfix will be appended to the sliders number display (even though it will not be added to the stored value). This is especially useful for adding any kind of unit (durations, distances, etc.) when using the range slider to pick these (see below). The `prefix` and `postfix` options may also be used together.
+
+```yaml
+fields:
+    text:
+        label: Event Duration
+        type:  rangeslider
+		min:   1
+        max:   7
+		step:  1
+		postfix: " days"
+```
