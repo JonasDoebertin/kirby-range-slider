@@ -1,7 +1,7 @@
 /**
  * Range Slider Field for Kirby 2
  *
- * @version   1.0.0-dev
+ * @version   1.0.0-rc.1
  * @author    Jonas Döbertin <hello@jd-powered.net>
  * @copyright Jonas Döbertin <hello@jd-powered.net>
  * @link      https://github.com/JonasDoebertin/kirby-range-slider
@@ -15,16 +15,18 @@
  */
 var RangeSliderField = function($, $field) {
     'use strict';
-
     var self = this;
 
+    /* Cache jQuery objects */
     this.$field   = $field;
     this.$wrapper = $field.parent();
     this.$slider  = $field.siblings().find('.js-rangeslider-slider');
     this.$display = $field.siblings().find('.js-rangeslider-display');
 
+    /* Cache DOM elements */
     this.slider = self.$slider.get(0);
 
+    /* State & config */
     this.isActive = false;
     this.config = {
         min:     self.$field.data('min'),
@@ -34,62 +36,25 @@ var RangeSliderField = function($, $field) {
         postfix: self.$field.data('postfix') || ''
     };
 
+    /**
+     * Initialization.
+     *
+     * @since 1.0.0
+     */
     this.init = function() {
-        var step,
-            decimals;
-
-        /* Calculate number of decimal units */
-        step = self.$field.data('step');
-        if (step % 1 === 0) {
-            decimals = 0;
-        }
-        else {
-            decimals = step.toString().split('.')[1].length;
-        }
-
         /* Initialize display width */
         self.initDisplayWidth();
 
         /* Initialize noUiSlider */
-        noUiSlider.create(self.slider, {
-            start: self.$field.val(),
-            range: {
-                min: self.config.min,
-                max: self.config.max
-            },
-            step: self.config.step,
-            connect: 'lower',
-            format: wNumb({
-                decimals: decimals,
-                mark: '.',
-                prefix: self.config.prefix,
-                postfix: self.config.postfix
-            })
-        });
-
-        /* Bind slider change handler */
-        self.slider.noUiSlider.on('update', function(values, handle) {
-            self.$field.val(values[handle]);
-            self.$display.text(values[handle]);
-        });
-
-        /* Bind "active" style handlers */
-        self.slider.noUiSlider.on('slide', function(values, handle) {
-            if (self.isActive === false) {
-                self.isActive = true;
-                self.attachActiveState();
-            }
-        });
-        self.slider.noUiSlider.on('change', function(values, handle) {
-            if (self.isActive === true) {
-                self.isActive = false;
-                self.detachActiveState();
-            }
-        });
+        self.initNoUiSlider();
     };
 
+    /**
+     * Initialize the displays min-width.
+     *
+     * @since 1.0.0
+     */
     this.initDisplayWidth = function() {
-
         var testNumber = Math.floor(parseInt(self.config.max)) + parseInt(self.config.step),
             testText   = '' + self.config.prefix + testNumber + self.config.postfix,
             width;
@@ -104,11 +69,86 @@ var RangeSliderField = function($, $field) {
     };
 
     /**
+     * Initialize noUiSlider.
+     *
+     * @since 1.0.0
+     */
+    this.initNoUiSlider = function() {
+        noUiSlider.create(self.slider, {
+            start: self.$field.val(),
+            range: {
+                min: self.config.min,
+                max: self.config.max
+            },
+            step: self.config.step,
+            connect: 'lower',
+            format: wNumb({
+                decimals: self.calculateDecimals(),
+                mark: '.',
+                prefix: self.config.prefix,
+                postfix: self.config.postfix
+            })
+        });
+
+        /* Bind slider change handler */
+        self.slider.noUiSlider.on('update', function(values, handle) {
+            self.$field.val(values[handle]);
+            self.$display.text(values[handle]);
+        });
+
+        /* Enable active state on interaction */
+        self.$slider.find('.noUi-handle').on('mousedown', self.setActiveState);
+        self.slider.noUiSlider.on('slide', self.setActiveState);
+
+        /* disable active state */
+        self.slider.noUiSlider.on('change', self.unsetActiveState);
+    };
+
+    /**
+     * Calculate the number of decimals based on the `step` setting.
+     *
+     * @since 1.0.0
+     * @return integer
+     */
+    this.calculateDecimals = function() {
+        if (self.$field.data('step') % 1 === 0) {
+            return 0;
+        }
+        else {
+            return step.toString().split('.')[1].length;
+        }
+    };
+
+    /**
+     * Enable the active state.
+     *
+     * @since 1.0.0
+     */
+    this.setActiveState = function() {
+        if (self.isActive === false) {
+            self.isActive = true;
+            self.attachActiveStateStyles();
+        }
+    };
+
+    /**
+     * Disable the active state.
+     *
+     * @since 1.0.0
+     */
+    this.unsetActiveState = function() {
+        if (self.isActive === true) {
+            self.isActive = false;
+            self.detachActiveStateStyles();
+        }
+    };
+
+    /**
      * Attach active state indicator class.
      *
      * @since 1.0.0
      */
-    this.attachActiveState = function() {
+    this.attachActiveStateStyles = function() {
         self.$wrapper.addClass('rangeslider-active');
     };
 
@@ -117,12 +157,11 @@ var RangeSliderField = function($, $field) {
      *
      * @since 1.0.0
      */
-    this.detachActiveState = function() {
+    this.detachActiveStateStyles = function() {
         self.$wrapper.removeClass('rangeslider-active');
     };
 
     return this.init();
-
 };
 
 /**

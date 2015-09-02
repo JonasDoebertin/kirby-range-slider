@@ -1,5 +1,5 @@
 # Changelog
 
-## Version 1.0.0-dev
+## Version 1.0.0-rc.1
 
-* tba
+* Initial public release

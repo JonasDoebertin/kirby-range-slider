@@ -2,7 +2,7 @@
 /**
  * Range Slider Field for Kirby 2
  *
- * @version   1.0.0-dev
+ * @version   1.0.0-rc.1
  * @author    Jonas Döbertin <hello@jd-powered.net>
  * @copyright Jonas Döbertin <hello@jd-powered.net>
  * @link      https://github.com/JonasDoebertin/kirby-range-slider
@@ -18,15 +18,7 @@ class RangeSliderField extends InputField
 {
 
     /**
-     * Language files directory.
-     *
-     * @since 1.0.0
-     * @var string
-     */
-    const LANG_DIR = 'languages';
-
-    /**
-     * Define frontend assets.
+     * Define backend assets.
      *
      * @since 1.0.0
      * @var array
@@ -45,67 +37,51 @@ class RangeSliderField extends InputField
 
     /**
      * Minimum value.
+     *
+     * @since 1.0.0
      * @var integer|float
      */
     public $min = 0;
 
     /**
      * Maximum value.
+     *
+     * @since 1.0.0
      * @var integer|float
      */
     public $max = 100;
 
     /**
      * Step value.
+     *
+     * @since 1.0.0
      * @var integer|float
      */
     public $step = 1;
 
     /**
      * Default value.
+     *
+     * @since 1.0.0
      * @var integer|float
      */
     public $default = 0;
 
     /**
      * Value display prefix.
+     *
+     * @since 1.0.0
      * @var string
      */
     public $prefix = '';
 
     /**
      * Value display postfix.
+     *
+     * @since 1.0.0
      * @var string
      */
     public $postfix = '';
-
-    /**
-     * Translated strings.
-     *
-     * @since 1.0.0
-     * @var array
-     */
-    protected $translation;
-
-    /**
-     * Field setup.
-     *
-     * (1) Load language files
-     *
-     * @since 1.0.0
-     */
-    public function __construct()
-    {
-        /* (1) Load language files */
-        $baseDir = __DIR__ . DS . self::LANG_DIR . DS;
-        $lang    = panel()->language();
-        if (file_exists($baseDir . $lang . '.php')) {
-            $this->translation = include $baseDir . $lang . '.php';
-        }
-        else {
-            $this->translation = include $baseDir . 'en.php';
-        }
-    }
 
     /**
      * Get a sanitized option value.
@@ -129,6 +105,7 @@ class RangeSliderField extends InputField
                 return $this->sanitizeNumber($this->{$key}, 1, true);
 
             case 'disabled':
+            case 'readonly':
                 return $this->sanitizeBool($this->{$key}, false);
 
             default:
@@ -199,7 +176,7 @@ class RangeSliderField extends InputField
             'autocomplete' => 'off',
             'tabindex'     => '-1',
             'disabled'     => $this->option('disabled'),
-            'readonly'     => $this->readonly(),
+            'readonly'     => $this->option('readonly'),
         ));
 
         $input->addClass('input-is-readonly');

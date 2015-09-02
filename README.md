@@ -6,7 +6,7 @@
 [![Issues](https://img.shields.io/github/issues/jonasdoebertin/kirby-range-slider.svg)](https://github.com/jonasdoebertin/kirby-range-slider/issues)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/JonasDoebertin/kirby-range-slider/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/JonasDoebertin/kirby-range-slider/?branch=develop)
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://raw.githubusercontent.com/jonasdoebertin/kirby-range-slider/master/LICENSE)
-[![Moral License](https://img.shields.io/badge/buy-moral_license-8dae28.svg)](https://gumroad.com/l/visualmarkdown)
+[![Moral License](https://img.shields.io/badge/buy-moral_license-8dae28.svg)](https://gum.co/rangeslider)
 
 This Panel field plugin for [Kirby 2](http://getkirby.com) enables you to use an intuitive and visual range slider without any hazzle. Just drop in the plugin and you're good to go!
 
@@ -14,7 +14,7 @@ This Panel field plugin for [Kirby 2](http://getkirby.com) enables you to use an
 
 Generally, this extension is free to use on both personal and commercial Kirby powered sites. You don't *have* to pay for it. However, please always keep in mind that developing this extension took place in my spare time (and maybe a little bit of the time I should have spend on other work related stuff) and up until now, quite some hours have been spent on it..
 
-If you like what I'm doing for the community and you want to support further development of this and future extensions & plugins for Kirby CMS, please consider [purchasing a moral license](https://gumroad.com/l/visualmarkdown).
+If you like what I'm doing for the community and you want to support further development of this and future extensions & plugins for Kirby CMS, please consider [purchasing a moral license](https://gum.co/rangeslider).
 
 **This is especially appreciated whenever you use one of the extensions in a project that you get payed for.**
 

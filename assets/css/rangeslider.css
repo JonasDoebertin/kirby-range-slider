@@ -1,4 +1,14 @@
 /**
+ * Range Slider Field for Kirby 2
+ *
+ * @version   1.0.0-rc.1
+ * @author    Jonas Döbertin <hello@jd-powered.net>
+ * @copyright Jonas Döbertin <hello@jd-powered.net>
+ * @link      https://github.com/JonasDoebertin/kirby-range-slider
+ * @license   GNU GPL v3.0 <http://opensource.org/licenses/GPL-3.0>
+ */
+
+/**
  * FIELD
  */
 .field-with-rangeslider {}
@@ -94,6 +104,7 @@
 .rangeslider-wrapper .noUi-connect {
     background: rgba(141, 174, 40, 0.4);
     box-shadow: none;
+    transition: none;
 }
 
 /* Handle */
