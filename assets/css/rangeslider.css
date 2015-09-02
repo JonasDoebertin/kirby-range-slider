@@ -1,0 +1,139 @@
+/**
+ * Range Slider Field for Kirby 2
+ *
+ * @version   1.0.0-rc.1
+ * @author    Jonas Döbertin <hello@jd-powered.net>
+ * @copyright Jonas Döbertin <hello@jd-powered.net>
+ * @link      https://github.com/JonasDoebertin/kirby-range-slider
+ * @license   GNU GPL v3.0 <http://opensource.org/licenses/GPL-3.0>
+ */
+
+/**
+ * FIELD
+ */
+.field-with-rangeslider {}
+
+    .field-with-rangeslider input[type=text] {
+        display: none;
+    }
+
+/* Disabled state */
+.field-with-rangeslider.field-is-disabled {
+    opacity: 1;
+}
+
+/**
+ * SLIDER & DISPLAY LAYOUT
+ */
+.rangeslider-wrapper {
+    display: flex;
+    x-justify-content: space-around;
+    x-align-items: stretch;
+}
+
+    .rangeslider-slider-wrapper {
+        width: 100%;
+        padding-right: 10px;
+    }
+
+    .rangeslider-display-wrapper {
+        flex: auto;
+        width: auto;
+        padding-left: 7px;
+    }
+
+
+/**
+ * DISPLAY
+ */
+
+.rangeslider-display {
+    padding: 4px 10px;
+    color: white;
+    font-size: 90%;
+    text-align: center;
+    border-radius: 3px;
+    position: relative;
+    cursor: default;
+    background-color: #777777;
+    white-space: nowrap;
+    transition: background-color 200ms ease-out;
+}
+
+    .rangeslider-display:after {
+        content: '';
+        position: absolute;
+        top: calc(50% - 6px);
+        left: -2px;
+        width: 0;
+        height: 0;
+        margin-left: -10px;
+        border: 6px solid transparent;
+        border-right-color: #777777;
+        transition: border-right-color 200ms ease-out;
+    }
+
+.rangeslider-active .rangeslider-display {
+    background-color: rgb(141, 174, 40);
+}
+
+    .rangeslider-active .rangeslider-display:after {
+        border-right-color: rgb(141, 174, 40);
+    }
+
+
+
+/**
+ * SLIDER
+ */
+
+/* Bar */
+.rangeslider-wrapper .noUi-target {
+    box-shadow: none;
+    border: none;
+    border-radius: 2px;
+    height: 10px;
+    margin-top: 8px;
+}
+
+.rangeslider-wrapper .noUi-background {
+    background: #ddd;
+    box-shadow: none;
+}
+
+.rangeslider-wrapper .noUi-connect {
+    background: rgba(141, 174, 40, 0.4);
+    box-shadow: none;
+    transition: none;
+}
+
+/* Handle */
+.rangeslider-wrapper .noUi-handle {
+    background: rgb(141, 174, 40);
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 3px 6px -2px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.rangeslider-wrapper .noUi-handle:before,
+.rangeslider-wrapper .noUi-handle:after {
+    display: none;
+}
+
+.rangeslider-wrapper .noUi-handle {
+    top: -4px;
+    left: -9px;
+    width: 18px;
+    height: 18px;
+}
+
+/* Disabled state */
+.rangeslider-wrapper [disabled].noUi-connect {
+    background: #ddd;
+}
+
+.rangeslider-wrapper [disabled] .noUi-handle {
+	cursor: not-allowed;
+    background: #777;
+}

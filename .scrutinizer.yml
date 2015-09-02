@@ -1,0 +1,4 @@
+filter:
+    excluded_paths:
+        - assets/js/nouislider-*     # All noUiSlider dependencies
+        - assets/js/wnumb-*          # All wNumb dependencies
