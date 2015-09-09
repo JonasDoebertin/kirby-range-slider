@@ -1,7 +1,7 @@
 /**
  * Range Slider Field for Kirby 2
  *
- * @version   1.0.0-rc.1
+ * @version   1.0.0
  * @author    Jonas Döbertin <hello@jd-powered.net>
  * @copyright Jonas Döbertin <hello@jd-powered.net>
  * @link      https://github.com/JonasDoebertin/kirby-range-slider
