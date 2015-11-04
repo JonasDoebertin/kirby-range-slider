@@ -55,12 +55,14 @@ var RangeSliderField = function($, $field) {
      * @since 1.0.0
      */
     this.initDisplayWidth = function() {
-        var testNumber = Math.floor(parseInt(self.config.max)) + parseInt(self.config.step),
+        var testNumber = Math.floor(parseFloat(self.config.max)) + parseFloat(self.config.step),
             testText   = '' + self.config.prefix + testNumber + self.config.postfix,
             width;
 
+        console.log(testText);
+
         self.$display.text(testText);
-        width = self.$display.outerWidth();
+        width = self.$display.outerWidth() + 10;
 
         self.$display.parent().css({
             minWidth: width + 'px',
@@ -111,11 +113,11 @@ var RangeSliderField = function($, $field) {
      * @return integer
      */
     this.calculateDecimals = function() {
-        if (self.$field.data('step') % 1 === 0) {
+        if (self.config.step % 1 === 0) {
             return 0;
         }
         else {
-            return step.toString().split('.')[1].length;
+            return self.config.step.toString().split('.')[1].length;
         }
     };
 

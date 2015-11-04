@@ -1,26 +1,30 @@
 <?php
+
 /**
- * Range Slider Field for Kirby 2
+ * Range Slider Field for Kirby 2.
  *
  * @version   1.0.0
+ *
  * @author    Jonas Döbertin <hello@jd-powered.net>
  * @copyright Jonas Döbertin <hello@jd-powered.net>
+ *
  * @link      https://github.com/JonasDoebertin/kirby-range-slider
+ *
  * @license   GNU GPL v3.0 <http://opensource.org/licenses/GPL-3.0>
  */
 
 /**
- * Range Slider Field
+ * Range Slider Field.
  *
  * @since 1.0.0
  */
 class RangeSliderField extends InputField
 {
-
     /**
      * Define backend assets.
      *
      * @since 1.0.0
+     *
      * @var array
      */
     public static $assets = array(
@@ -39,7 +43,8 @@ class RangeSliderField extends InputField
      * Minimum value.
      *
      * @since 1.0.0
-     * @var integer|float
+     *
+     * @var int|float
      */
     public $min = 0;
 
@@ -47,7 +52,8 @@ class RangeSliderField extends InputField
      * Maximum value.
      *
      * @since 1.0.0
-     * @var integer|float
+     *
+     * @var int|float
      */
     public $max = 100;
 
@@ -55,7 +61,8 @@ class RangeSliderField extends InputField
      * Step value.
      *
      * @since 1.0.0
-     * @var integer|float
+     *
+     * @var int|float
      */
     public $step = 1;
 
@@ -63,7 +70,8 @@ class RangeSliderField extends InputField
      * Default value.
      *
      * @since 1.0.0
-     * @var integer|float
+     *
+     * @var int|float
      */
     public $default = 0;
 
@@ -71,6 +79,7 @@ class RangeSliderField extends InputField
      * Value display prefix.
      *
      * @since 1.0.0
+     *
      * @var string
      */
     public $prefix = '';
@@ -79,6 +88,7 @@ class RangeSliderField extends InputField
      * Value display postfix.
      *
      * @since 1.0.0
+     *
      * @var string
      */
     public $postfix = '';
@@ -87,7 +97,9 @@ class RangeSliderField extends InputField
      * Get a sanitized option value.
      *
      * @since 1.0.0
-     * @param string    $key
+     *
+     * @param string $key
+     *
      * @return mixed
      */
     public function option($key)
@@ -95,10 +107,10 @@ class RangeSliderField extends InputField
         switch ($key) {
 
             case 'min':
-                return $this->sanitizeNumber($this->{$key}, 1, false);
+                return $this->sanitizeNumber($this->{$key}, 1, true);
 
             case 'max':
-                return $this->sanitizeNumber($this->{$key}, 100, false);
+                return $this->sanitizeNumber($this->{$key}, 100, true);
 
             case 'step':
             case 'default':
@@ -117,10 +129,12 @@ class RangeSliderField extends InputField
      * Sanitize a number and maybe apply a default value.
      *
      * @since 1.0.0
-     * @param mixed    $number
-     * @param integer   $default
-     * @param bool    $float
-     * @return integer|float
+     *
+     * @param mixed $number
+     * @param int   $default
+     * @param bool  $float
+     *
+     * @return int|float
      */
     protected function sanitizeNumber($number, $default = 0, $float = false)
     {
@@ -131,8 +145,10 @@ class RangeSliderField extends InputField
      * Sanitize a boolean value and maybe apply a default value.
      *
      * @since 1.0.0
-     * @param mixed    $bool
-     * @param bool    $default
+     *
+     * @param mixed $bool
+     * @param bool  $default
+     *
      * @return bool
      */
     protected function sanitizeBool($bool, $default = false)
@@ -157,9 +173,10 @@ class RangeSliderField extends InputField
     }
 
     /**
-     * Create input element
+     * Create input element.
      *
      * @since 1.0.0
+     *
      * @return Brick
      */
     public function input()
@@ -195,9 +212,10 @@ class RangeSliderField extends InputField
     }
 
     /**
-     * Create outer field element
+     * Create outer field element.
      *
      * @since 1.0.0
+     *
      * @return Brick
      */
     public function element()
@@ -209,9 +227,10 @@ class RangeSliderField extends InputField
     }
 
     /**
-     * Create inner field element
+     * Create inner field element.
      *
      * @since 1.0.0
+     *
      * @return Brick
      */
     public function content()
@@ -223,12 +242,13 @@ class RangeSliderField extends InputField
 
     /**
      * Get the fields value.
+     *
      * @since 1.0.0
-     * @return integer|float
+     *
+     * @return int|float
      */
     public function value()
     {
         return (isset($this->value) and is_numeric($this->value)) ? $this->value : $this->$this->option('default');
     }
-
 }
