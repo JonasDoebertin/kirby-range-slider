@@ -95,10 +95,10 @@ class RangeSliderField extends InputField
         switch ($key) {
 
             case 'min':
-                return $this->sanitizeNumber($this->{$key}, 1, false);
+                return $this->sanitizeNumber($this->{$key}, 1, true);
 
             case 'max':
-                return $this->sanitizeNumber($this->{$key}, 100, false);
+                return $this->sanitizeNumber($this->{$key}, 100, true);
 
             case 'step':
             case 'default':
