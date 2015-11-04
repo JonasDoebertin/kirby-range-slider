@@ -1,7 +1,7 @@
 /**
  * Range Slider Field for Kirby 2
  *
- * @version   1.0.0
+ * @version   1.1.0
  * @author    Jonas Döbertin <hello@jd-powered.net>
  * @copyright Jonas Döbertin <hello@jd-powered.net>
  * @link      https://github.com/JonasDoebertin/kirby-range-slider
@@ -59,8 +59,6 @@ var RangeSliderField = function($, $field) {
             testText   = '' + self.config.prefix + testNumber + self.config.postfix,
             width;
 
-        console.log(testText);
-
         self.$display.text(testText);
         width = self.$display.outerWidth() + 10;
 
@@ -93,8 +91,8 @@ var RangeSliderField = function($, $field) {
         });
 
         /* Bind slider change handler */
-        self.slider.noUiSlider.on('update', function(values, handle) {
-            self.$field.val(values[handle]);
+        self.slider.noUiSlider.on('update', function(values, handle, unencoded) {
+            self.$field.val(unencoded);
             self.$display.text(values[handle]);
         });
 
