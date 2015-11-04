@@ -3,7 +3,7 @@
 /**
  * Range Slider Field for Kirby 2.
  *
- * @version   1.0.0
+ * @version   1.1.0
  *
  * @author    Jonas Döbertin <hello@jd-powered.net>
  * @copyright Jonas Döbertin <hello@jd-powered.net>
@@ -29,11 +29,11 @@ class RangeSliderField extends InputField
      */
     public static $assets = array(
         'css' => array(
-            'nouislider-8.0.2.min.css',
+            'nouislider-8.1.0.min.css',
             'rangeslider.css',
         ),
         'js' => array(
-            'nouislider-8.0.2.min.js',
+            'nouislider-8.1.0.min.js',
             'wnumb-1.0.2.min.js',
             'rangeslider.js',
         ),
@@ -249,6 +249,6 @@ class RangeSliderField extends InputField
      */
     public function value()
     {
-        return (isset($this->value) and is_numeric($this->value)) ? $this->value : $this->$this->option('default');
+        return (isset($this->value) and is_numeric($this->value)) ? $this->value : $this->option('default');
     }
 }
