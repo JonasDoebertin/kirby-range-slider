@@ -198,10 +198,11 @@ class RangeSliderField extends InputField
 
         $input->addClass('input-is-readonly');
 
+
         /* Set data attributes */
         $input->data(array(
             'field'   => 'rangesliderfield',
-            'min'     => $this->option('min'),
+            'min'     => $this->option('min') == 0 || $this->option('min') == false ? 0 : $this->option('min'),
             'max'     => $this->option('max'),
             'step'    => $this->option('step'),
             'prefix'  => $this->option('prefix'),
