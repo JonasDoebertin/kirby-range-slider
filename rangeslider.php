@@ -202,8 +202,8 @@ class RangeSliderField extends InputField
         /* Set data attributes */
         $input->data(array(
             'field'   => 'rangesliderfield',
-            'min'     => $this->option('min') == 0 || $this->option('min') == false ? 0 : $this->option('min'),
-            'max'     => $this->option('max'),
+            'min'     => (int) $this->option('min'),
+            'max'     => (int) $this->option('max'),
             'step'    => $this->option('step'),
             'prefix'  => $this->option('prefix'),
             'postfix' => $this->option('postfix'),
