@@ -27,17 +27,17 @@ class RangeSliderField extends InputField
      *
      * @var array
      */
-    public static $assets = array(
-        'css' => array(
+    public static $assets = [
+        'css' => [
             'nouislider-8.1.0.min.css',
             'rangeslider.css',
-        ),
-        'js' => array(
+        ],
+        'js' => [
             'nouislider-8.1.0.min.js',
             'wnumb-1.0.2.min.js',
             'rangeslider.js',
-        ),
-    );
+        ],
+    ];
 
     /**
      * Minimum value.
@@ -184,7 +184,7 @@ class RangeSliderField extends InputField
         $input = new Brick('input');
 
         /* Set general attributes */
-        $input->attr(array(
+        $input->attr([
             'type'         => 'text',
             'name'         => $this->name(),
             'id'           => $this->id(),
@@ -194,19 +194,19 @@ class RangeSliderField extends InputField
             'tabindex'     => '-1',
             'disabled'     => $this->option('disabled'),
             'readonly'     => $this->option('readonly'),
-        ));
+        ]);
 
         $input->addClass('input-is-readonly');
 
         /* Set data attributes */
-        $input->data(array(
+        $input->data([
             'field'   => 'rangesliderfield',
-            'min'     => $this->option('min'),
-            'max'     => $this->option('max'),
+            'min'     => $this->option('min') == 0 || $this->option('min') == false ? 0 : $this->option('min'),
+            'max'     => $this->option('max') == 0 || $this->option('max') == false ? 0 : $this->option('max'),
             'step'    => $this->option('step'),
             'prefix'  => $this->option('prefix'),
             'postfix' => $this->option('postfix'),
-        ));
+        ]);
 
         return $input;
     }
@@ -235,7 +235,7 @@ class RangeSliderField extends InputField
      */
     public function content()
     {
-        $content = Tpl::load(__DIR__ . DS . 'partials' . DS . 'content.php', array('field' => $this));
+        $content = Tpl::load(__DIR__.DS.'partials'.DS.'content.php', ['field' => $this]);
 
         return $content;
     }

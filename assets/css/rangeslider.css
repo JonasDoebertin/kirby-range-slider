@@ -29,6 +29,9 @@
     display: flex;
     x-justify-content: space-around;
     x-align-items: stretch;
+    padding: .45em;
+    border: 2px solid #ddd;
+    background: #fff;
 }
 
     .rangeslider-slider-wrapper {
